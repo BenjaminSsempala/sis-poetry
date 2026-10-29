@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Crane and Dove Poetry</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon-192.png">
+<meta name="theme-color" content="#4369D8">
+<style>
+@font-face { font-family: "Jakarta"; font-style: normal; font-weight: 200 800; src: url(assets/jakarta.woff2) format("woff2"); }
+:root {
+  --paper: #FFF8EC; --ink: #17204A; --soft: #5B4A3A; --muted: #8A7A66; --line: #E4D3B3;
+  --gold: #F8B03F; --blue: #4369D8; --green: #3E7A34; --card: #FFFFFF;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { background: var(--paper); }
+body { font-family: "Jakarta", "Plus Jakarta Sans", "Trebuchet MS", sans-serif; color: var(--soft); background: var(--paper); min-height: 100vh; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+header { background: linear-gradient(#FFE9BE, var(--paper)); padding: 28px 0 10px; }
+.brand { display: flex; align-items: center; gap: 18px; }
+.brand img { height: 74px; width: auto; flex: none; }
+.brand h1 { font-size: clamp(26px, 4.2vw, 42px); font-weight: 800; color: var(--ink); line-height: 1.1; }
+.brand p { font-size: clamp(15px, 1.8vw, 19px); font-weight: 600; color: var(--muted); margin-top: 4px; }
+.hello { display: flex; align-items: center; gap: 14px; margin: 26px 0 18px; }
+.hello .em { font-size: clamp(40px, 5vw, 56px); line-height: 1; }
+.hello h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 800; color: var(--ink); }
+.lessons { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding-bottom: 12px; }
+.lesson { display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--card); border-radius: 30px; padding: 22px 22px 20px; box-shadow: 0 8px 0 var(--line); border: 4px solid transparent; transition: transform .15s, border-color .15s; }
+.lesson:hover, .lesson:focus-visible { transform: translateY(-3px); border-color: var(--gold); outline: none; }
+.lesson .em { font-size: 66px; line-height: 1.1; }
+.lesson .wk { font-size: 15px; font-weight: 700; color: var(--muted); margin-top: 6px; }
+.lesson h3 { font-size: 28px; font-weight: 800; color: var(--green); line-height: 1.15; margin-top: 2px; }
+.lesson p { font-size: 17px; font-weight: 600; line-height: 1.45; margin-top: 8px; flex: 1; }
+.lesson .go { align-self: flex-start; margin-top: 16px; font-size: 20px; font-weight: 800; color: #fff; background: var(--green); border-radius: 22px; padding: 9px 22px; box-shadow: 0 5px 0 #2C5A25; }
+.empty { font-size: 22px; font-weight: 700; color: var(--muted); background: var(--card); border-radius: 26px; padding: 28px; text-align: center; box-shadow: 0 6px 0 var(--line); }
+footer { margin: 34px 0 30px; font-size: 15px; font-weight: 600; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 22px; }
+#offline::before { content: "● "; color: var(--line); }
+#offline.ready::before { color: var(--green); }
+@media (max-width: 720px) {
+  .wrap { padding: 0 16px; }
+  .brand img { height: 56px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap brand">
+    <img src="assets/logo.png" alt="Stephens International School">
+    <div>
+      <h1>Crane and Dove Poetry</h1>
+      <p>Stephens International School · Poetry and Spoken Word · Fall Term 2026</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hello"><span class="em">🕊️🐦</span><h2>Our lessons</h2></div>
+  <div class="lessons" id="lessons"></div>
+
+  <footer>
+    <span id="offline">Getting lessons ready for offline use</span>
+    <span>Open a lesson, then press F for full screen.</span>
+  </footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var listEl = document.getElementById("lessons");
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  fetch("lessons.json", { cache: "no-cache" })
+    .then(function (r) { return r.json(); })
+    .then(function (lessons) {
+      lessons.sort(function (a, b) { return b.week - a.week; });
+      if (!lessons.length) { listEl.innerHTML = '<div class="empty">No lessons yet. Check back soon! 🌱</div>'; return; }
+      listEl.innerHTML = lessons.map(function (l) {
+        return '<a class="lesson" href="' + esc(l.path) + '">' +
+          '<span class="em">' + esc(l.icon) + '</span>' +
+          '<span class="wk">Week ' + esc(l.week) + (l.dates ? ' · ' + esc(l.dates) : '') + '</span>' +
+          '<h3>' + esc(l.title) + '</h3>' +
+          '<p>' + esc(l.about) + '</p>' +
+          '<span class="go">▶ Open</span></a>';
+      }).join("");
+    })
+    .catch(function () { listEl.innerHTML = '<div class="empty">The lesson list did not load. Check the internet and refresh.</div>'; });
+
+  var off = document.getElementById("offline");
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").then(function () { return navigator.serviceWorker.ready; }).then(function () {
+      off.textContent = "Saved for offline use on this computer"; off.className = "ready";
+    }).catch(function () { off.textContent = "Offline use is not available in this browser"; });
+  } else {
+    off.textContent = "Offline use is not available in this browser";
+  }
+})();
+</script>
+</body>
+</html>

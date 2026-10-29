@@ -4,7 +4,7 @@ Poetry and Spoken Word lessons for the Crane and Dove class at Stephens Internat
 
 **https://benjaminssempala.github.io/sis-poetry/**
 
-Open a lesson from the home page. Each lesson is one self contained page, so once it has loaded it keeps working if the internet drops. After the first visit, the whole site also opens with no internet on that computer.
+Open a lesson from the home page. Lessons are not tied to a week or a date, so any lesson can be used again at any time. Each lesson is one self contained page, so once it has loaded it keeps working if the internet drops. After the first visit, the whole site also opens with no internet on that computer.
 
 ## Add a lesson
 
@@ -12,7 +12,7 @@ Open a lesson from the home page. Each lesson is one self contained page, so onc
 2. From this folder, run:
 
    ```bash
-   python3 add_lesson.py "path/to/lesson.html" --id my-lesson --title "My Lesson" --week 9 --dates "2 to 6 Nov" --icon "🎤" --about "One short line for the lesson card" --guide "path/to/guide.html"
+   python3 add_lesson.py "path/to/lesson.html" --id my-lesson --title "My Lesson" --tag "30 minutes · chant and actions" --icon "🎤" --about "One short line for the lesson card" --guide "path/to/guide.html"
    ```
 
    This copies the page into `lessons/my-lesson/`, adds the home button and the offline helper, and adds the lesson to `lessons.json`. The `--guide` page is the printable Teacher guide shown on the lesson card (copy an existing `guide.html` and change the words).
@@ -36,7 +36,7 @@ Then open http://localhost:8000.
 
 ## What is in here
 
-- `index.html`: the home page (lesson cards, newest first)
+- `index.html`: the home page (lesson cards, newest lesson first)
 - `lessons.json`: the list of lessons the home page shows
 - `lessons/`: one folder per lesson (`index.html` is the lesson, `guide.html` the printable teacher guide)
 - `sw.js` and `manifest.webmanifest`: offline use and Install as an app

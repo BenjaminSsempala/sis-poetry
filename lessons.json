@@ -2,8 +2,7 @@
   {
     "id": "sweep-it-clean",
     "title": "Sweep It Clean",
-    "week": 8,
-    "dates": "26 to 30 Oct",
+    "tag": "30 minutes · chant, actions and a word game",
     "icon": "🧹",
     "about": "Clean the classroom with the chant, then help Mr Messy sweep away too many words.",
     "path": "lessons/sweep-it-clean/",
@@ -12,8 +11,7 @@
   {
     "id": "i-am-a-tree",
     "title": "I Am a Tree",
-    "week": 4,
-    "dates": "28 Sep to 2 Oct",
+    "tag": "30 minutes · chant and actions",
     "icon": "🌳",
     "about": "Grow from a tiny seed, sway in the wind and say our tree chant with the voice.",
     "path": "lessons/i-am-a-tree/",

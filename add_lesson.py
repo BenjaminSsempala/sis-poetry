@@ -2,7 +2,7 @@
 """Add a lesson to the Crane and Dove Poetry site, or update one that is already there.
 
     python3 add_lesson.py path/to/lesson.html --id sweep-it-clean --title "Sweep It Clean" \
-        --week 8 --dates "26 to 30 Oct" --icon "🧹" \
+        --tag "30 minutes · chant and actions" --icon "🧹" \
         --about "One short line for the lesson card" --guide path/to/guide.html
 
 It copies the page to lessons/<id>/index.html (and the printable teacher guide to guide.html), adds the home button and the offline helper,
@@ -29,8 +29,7 @@ def main():
     ap.add_argument("page", type=pathlib.Path, help="the finished lesson HTML file")
     ap.add_argument("--id", required=True, help="short folder name, letters, numbers and hyphens")
     ap.add_argument("--title", required=True)
-    ap.add_argument("--week", required=True, type=int)
-    ap.add_argument("--dates", default="")
+    ap.add_argument("--tag", default="", help="one short line under the icon, for example 30 minutes · chant and actions")
     ap.add_argument("--icon", default="📖")
     ap.add_argument("--about", default="")
     ap.add_argument("--guide", type=pathlib.Path, help="a printable teacher guide page for this lesson")
@@ -57,12 +56,16 @@ def main():
 
     index = SITE / "lessons.json"
     lessons = json.loads(index.read_text(encoding="utf-8")) if index.exists() else []
-    entry = {"id": args.id, "title": args.title, "week": args.week, "dates": args.dates,
+    entry = {"id": args.id, "title": args.title, "tag": args.tag,
              "icon": args.icon, "about": args.about, "path": f"lessons/{args.id}/"}
     if guide.exists():
         entry["guide"] = f"lessons/{args.id}/guide.html"
-    lessons = [l for l in lessons if l["id"] != args.id] + [entry]
-    lessons.sort(key=lambda l: (-l["week"], l["title"]))
+    # an update keeps its place on the home page; a new lesson goes to the top
+    ids = [l["id"] for l in lessons]
+    if args.id in ids:
+        lessons[ids.index(args.id)] = entry
+    else:
+        lessons.insert(0, entry)
     index.write_text(json.dumps(lessons, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     sw = SITE / "sw.js"

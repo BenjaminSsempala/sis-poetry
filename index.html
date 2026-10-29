@@ -57,7 +57,7 @@ footer { margin: 34px 0 30px; font-size: 15px; font-weight: 600; color: var(--mu
     <img src="assets/logo.png" alt="Stephens International School">
     <div>
       <h1>Crane and Dove Poetry</h1>
-      <p>Stephens International School · Poetry and Spoken Word · Fall Term 2026</p>
+      <p>Stephens International School · Poetry and Spoken Word</p>
     </div>
   </div>
 </header>
@@ -89,12 +89,11 @@ footer { margin: 34px 0 30px; font-size: 15px; font-weight: 600; color: var(--mu
   fetch("lessons.json", { cache: "no-cache" })
     .then(function (r) { return r.json(); })
     .then(function (lessons) {
-      lessons.sort(function (a, b) { return b.week - a.week; });
       if (!lessons.length) { listEl.innerHTML = '<div class="empty">No lessons yet. Check back soon! 🌱</div>'; return; }
       listEl.innerHTML = lessons.map(function (l) {
         return '<div class="lesson">' +
           '<span class="em">' + esc(l.icon) + '</span>' +
-          '<span class="wk">Week ' + esc(l.week) + (l.dates ? ' · ' + esc(l.dates) : '') + '</span>' +
+          (l.tag ? '<span class="wk">' + esc(l.tag) + '</span>' : '') +
           '<h3>' + esc(l.title) + '</h3>' +
           '<p>' + esc(l.about) + '</p>' +
           '<div class="actions"><a class="go" href="' + esc(l.path) + '">▶ Open lesson</a>' +

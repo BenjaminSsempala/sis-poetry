@@ -6,7 +6,8 @@
     "dates": "26 to 30 Oct",
     "icon": "🧹",
     "about": "Clean the classroom with the chant, then help Mr Messy sweep away too many words.",
-    "path": "lessons/sweep-it-clean/"
+    "path": "lessons/sweep-it-clean/",
+    "guide": "lessons/sweep-it-clean/guide.html"
   },
   {
     "id": "i-am-a-tree",
@@ -15,6 +16,7 @@
     "dates": "28 Sep to 2 Oct",
     "icon": "🌳",
     "about": "Grow from a tiny seed, sway in the wind and say our tree chant with the voice.",
-    "path": "lessons/i-am-a-tree/"
+    "path": "lessons/i-am-a-tree/",
+    "guide": "lessons/i-am-a-tree/guide.html"
   }
 ]

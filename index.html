@@ -12,7 +12,7 @@
 @font-face { font-family: "Jakarta"; font-style: normal; font-weight: 200 800; src: url(assets/jakarta.woff2) format("woff2"); }
 :root {
   --paper: #FFF8EC; --ink: #17204A; --soft: #5B4A3A; --muted: #8A7A66; --line: #E4D3B3;
-  --gold: #F8B03F; --blue: #4369D8; --green: #3E7A34; --card: #FFFFFF;
+  --gold: #F8B03F; --blue: #4369D8; --green: #3E7A34; --orange: #C9761B; --card: #FFFFFF;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { background: var(--paper); }
@@ -23,24 +23,31 @@ header { background: linear-gradient(#FFE9BE, var(--paper)); padding: 28px 0 10p
 .brand img { height: 74px; width: auto; flex: none; }
 .brand h1 { font-size: clamp(26px, 4.2vw, 42px); font-weight: 800; color: var(--ink); line-height: 1.1; }
 .brand p { font-size: clamp(15px, 1.8vw, 19px); font-weight: 600; color: var(--muted); margin-top: 4px; }
-.hello { display: flex; align-items: center; gap: 14px; margin: 26px 0 18px; }
-.hello .em { font-size: clamp(40px, 5vw, 56px); line-height: 1; }
-.hello h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 800; color: var(--ink); }
-.lessons { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding-bottom: 12px; }
-.lesson { display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--card); border-radius: 30px; padding: 22px 22px 20px; box-shadow: 0 8px 0 var(--line); border: 4px solid transparent; transition: transform .15s, border-color .15s; }
-.lesson:hover, .lesson:focus-visible { transform: translateY(-3px); border-color: var(--gold); outline: none; }
+h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 800; color: var(--ink); margin: 28px 0 14px; }
+.how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.step { display: flex; align-items: center; gap: 14px; background: var(--card); border-radius: 26px; padding: 16px 18px; box-shadow: 0 6px 0 var(--line); font-size: 19px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+.step .n { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--gold); color: var(--ink); font-weight: 800; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+.step .em { flex: none; font-size: 36px; line-height: 1; }
+.note { font-size: 17px; font-weight: 600; color: var(--muted); margin-top: 14px; line-height: 1.5; }
+.lessons { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding-bottom: 12px; }
+.lesson { display: flex; flex-direction: column; background: var(--card); border-radius: 30px; padding: 22px 22px 20px; box-shadow: 0 8px 0 var(--line); }
 .lesson .em { font-size: 66px; line-height: 1.1; }
 .lesson .wk { font-size: 15px; font-weight: 700; color: var(--muted); margin-top: 6px; }
 .lesson h3 { font-size: 28px; font-weight: 800; color: var(--green); line-height: 1.15; margin-top: 2px; }
 .lesson p { font-size: 17px; font-weight: 600; line-height: 1.45; margin-top: 8px; flex: 1; }
-.lesson .go { align-self: flex-start; margin-top: 16px; font-size: 20px; font-weight: 800; color: #fff; background: var(--green); border-radius: 22px; padding: 9px 22px; box-shadow: 0 5px 0 #2C5A25; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.actions a { font-size: 19px; font-weight: 800; text-decoration: none; border-radius: 22px; padding: 10px 20px; transition: transform .15s; }
+.actions a:hover, .actions a:focus-visible { transform: translateY(-2px); outline: none; }
+.go { color: #fff; background: var(--green); box-shadow: 0 5px 0 #2C5A25; }
+.guide { color: var(--soft); background: #F3EBDD; box-shadow: 0 5px 0 var(--line); }
 .empty { font-size: 22px; font-weight: 700; color: var(--muted); background: var(--card); border-radius: 26px; padding: 28px; text-align: center; box-shadow: 0 6px 0 var(--line); }
 footer { margin: 34px 0 30px; font-size: 15px; font-weight: 600; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 22px; }
 #offline::before { content: "● "; color: var(--line); }
 #offline.ready::before { color: var(--green); }
-@media (max-width: 720px) {
+@media (max-width: 760px) {
   .wrap { padding: 0 16px; }
   .brand img { height: 56px; }
+  .how { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -56,12 +63,20 @@ footer { margin: 34px 0 30px; font-size: 15px; font-weight: 600; color: var(--mu
 </header>
 
 <main class="wrap">
-  <div class="hello"><span class="em">🕊️🐦</span><h2>Our lessons</h2></div>
+  <h2>How to use it</h2>
+  <div class="how">
+    <div class="step"><span class="n">1</span><span class="em">🔊</span><span>Turn the speakers up</span></div>
+    <div class="step"><span class="n">2</span><span class="em">👆</span><span>Open a lesson, then press 📺 Full screen</span></div>
+    <div class="step"><span class="n">3</span><span class="em">▶️</span><span>Press Next when the children are ready</span></div>
+  </div>
+  <p class="note">First time? Each lesson shows you its buttons. Stuck in a lesson? Press ❓ Help. Print the 📋 Teacher guide before class to see what happens and what to say.</p>
+
+  <h2>Our lessons 🕊️🐦</h2>
   <div class="lessons" id="lessons"></div>
 
   <footer>
     <span id="offline">Getting lessons ready for offline use</span>
-    <span>Open a lesson, then press F for full screen.</span>
+    <span>Lessons open even without internet once they have been opened here.</span>
   </footer>
 </main>
 
@@ -77,12 +92,13 @@ footer { margin: 34px 0 30px; font-size: 15px; font-weight: 600; color: var(--mu
       lessons.sort(function (a, b) { return b.week - a.week; });
       if (!lessons.length) { listEl.innerHTML = '<div class="empty">No lessons yet. Check back soon! 🌱</div>'; return; }
       listEl.innerHTML = lessons.map(function (l) {
-        return '<a class="lesson" href="' + esc(l.path) + '">' +
+        return '<div class="lesson">' +
           '<span class="em">' + esc(l.icon) + '</span>' +
           '<span class="wk">Week ' + esc(l.week) + (l.dates ? ' · ' + esc(l.dates) : '') + '</span>' +
           '<h3>' + esc(l.title) + '</h3>' +
           '<p>' + esc(l.about) + '</p>' +
-          '<span class="go">▶ Open</span></a>';
+          '<div class="actions"><a class="go" href="' + esc(l.path) + '">▶ Open lesson</a>' +
+          (l.guide ? '<a class="guide" href="' + esc(l.guide) + '">📋 Teacher guide</a>' : '') + '</div></div>';
       }).join("");
     })
     .catch(function () { listEl.innerHTML = '<div class="empty">The lesson list did not load. Check the internet and refresh.</div>'; });

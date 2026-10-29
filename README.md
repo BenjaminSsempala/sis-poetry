@@ -12,10 +12,10 @@ Open a lesson from the home page. Each lesson is one self contained page, so onc
 2. From this folder, run:
 
    ```bash
-   python3 add_lesson.py "path/to/lesson.html" --id my-lesson --title "My Lesson" --week 9 --dates "2 to 6 Nov" --icon "🎤" --about "One short line for the lesson card"
+   python3 add_lesson.py "path/to/lesson.html" --id my-lesson --title "My Lesson" --week 9 --dates "2 to 6 Nov" --icon "🎤" --about "One short line for the lesson card" --guide "path/to/guide.html"
    ```
 
-   This copies the page into `lessons/my-lesson/`, adds the home button and the offline helper, and adds the lesson to `lessons.json`.
+   This copies the page into `lessons/my-lesson/`, adds the home button and the offline helper, and adds the lesson to `lessons.json`. The `--guide` page is the printable Teacher guide shown on the lesson card (copy an existing `guide.html` and change the words).
 3. Publish:
 
    ```bash
@@ -38,7 +38,7 @@ Then open http://localhost:8000.
 
 - `index.html`: the home page (lesson cards, newest first)
 - `lessons.json`: the list of lessons the home page shows
-- `lessons/`: one folder per lesson
+- `lessons/`: one folder per lesson (`index.html` is the lesson, `guide.html` the printable teacher guide)
 - `sw.js` and `manifest.webmanifest`: offline use and Install as an app
 - `assets/`: school logo, icons and font
 - `add_lesson.py`: adds or updates a lesson

@@ -1,6 +1,6 @@
 /* Keeps the SIS Poetry lessons working when the internet drops.
    add_lesson.py changes VERSION whenever a lesson is added, so every computer picks up the new list. */
-const VERSION = "2026-10-29-104040";
+const VERSION = "2026-10-29-111608";
 const CACHE = "sis-poetry-" + VERSION;
 const CORE = ["./", "index.html", "lessons.json", "manifest.webmanifest",
   "assets/logo.png", "assets/icon-192.png", "assets/icon-512.png", "assets/jakarta.woff2"];
@@ -11,7 +11,7 @@ self.addEventListener("install", (event) => {
     await cache.addAll(CORE);
     try {
       const list = await (await fetch("lessons.json", { cache: "no-store" })).json();
-      await cache.addAll(list.map((lesson) => lesson.path));
+      await cache.addAll(list.flatMap((lesson) => (lesson.guide ? [lesson.path, lesson.guide] : [lesson.path])));
     } catch (err) { /* lessons are cached the first time they are opened instead */ }
     await self.skipWaiting();
   })());

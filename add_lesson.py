@@ -3,9 +3,9 @@
 
     python3 add_lesson.py path/to/lesson.html --id sweep-it-clean --title "Sweep It Clean" \
         --week 8 --dates "26 to 30 Oct" --icon "🧹" \
-        --about "One short line for the lesson card"
+        --about "One short line for the lesson card" --guide path/to/guide.html
 
-It copies the page to lessons/<id>/index.html, adds the home button and the offline helper,
+It copies the page to lessons/<id>/index.html (and the printable teacher guide to guide.html), adds the home button and the offline helper,
 keeps the page out of search engines, updates lessons.json and refreshes the offline cache.
 Then commit and push (or upload) as usual.
 """
@@ -33,6 +33,7 @@ def main():
     ap.add_argument("--dates", default="")
     ap.add_argument("--icon", default="📖")
     ap.add_argument("--about", default="")
+    ap.add_argument("--guide", type=pathlib.Path, help="a printable teacher guide page for this lesson")
     args = ap.parse_args()
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", args.id):
         ap.error("--id must be lowercase letters, numbers and hyphens")
@@ -50,10 +51,16 @@ def main():
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(html, encoding="utf-8")
 
+    guide = dest.parent / "guide.html"
+    if args.guide:
+        guide.write_text(args.guide.read_text(encoding="utf-8"), encoding="utf-8")
+
     index = SITE / "lessons.json"
     lessons = json.loads(index.read_text(encoding="utf-8")) if index.exists() else []
     entry = {"id": args.id, "title": args.title, "week": args.week, "dates": args.dates,
              "icon": args.icon, "about": args.about, "path": f"lessons/{args.id}/"}
+    if guide.exists():
+        entry["guide"] = f"lessons/{args.id}/guide.html"
     lessons = [l for l in lessons if l["id"] != args.id] + [entry]
     lessons.sort(key=lambda l: (-l["week"], l["title"]))
     index.write_text(json.dumps(lessons, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

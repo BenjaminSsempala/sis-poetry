@@ -1,5 +1,14 @@
 [
   {
+    "id": "we-look-after-the-earth",
+    "title": "We Look After the Earth",
+    "tag": "30 minutes · chant, animals and actions",
+    "icon": "🌍",
+    "about": "Shout out who lives on the earth, say our earth chant with the voice and help clean up the park.",
+    "path": "lessons/we-look-after-the-earth/",
+    "guide": "lessons/we-look-after-the-earth/guide.html"
+  },
+  {
     "id": "sweep-it-clean",
     "title": "Sweep It Clean",
     "tag": "30 minutes · chant, actions and a word game",

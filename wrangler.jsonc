@@ -1,0 +1,10 @@
+// Cloudflare settings for the class site: serve the files exactly as they are.
+{
+  "name": "sis-poetry",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": ".",
+    "html_handling": "none",
+    "not_found_handling": "none"
+  }
+}

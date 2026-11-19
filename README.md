@@ -1,8 +1,10 @@
 # Crane and Dove Poetry
 
-Poetry and Spoken Word lessons for the Crane and Dove class at Stephens International School, hosted free on GitHub Pages:
+Poetry and Spoken Word lessons for the Crane and Dove class at Stephens International School, hosted free on Cloudflare:
 
-**https://benjaminssempala.github.io/sis-poetry/**
+**https://sis-poetry.benjspoetry.workers.dev/**
+
+Cloudflare rebuilds the site from this repo on every push. The old GitHub Pages address (https://benjaminssempala.github.io/sis-poetry/) still works on networks that can reach it.
 
 Open a lesson from the home page. Lessons are not tied to a week or a date, so any lesson can be used again at any time. Each lesson is one self contained page, so once it has loaded it keeps working if the internet drops. After the first visit, the whole site also opens with no internet on that computer.
 

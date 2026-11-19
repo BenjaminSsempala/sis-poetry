@@ -59,7 +59,7 @@ def main():
     entry = {"id": args.id, "title": args.title, "tag": args.tag,
              "icon": args.icon, "about": args.about, "path": f"lessons/{args.id}/"}
     if guide.exists():
-        entry["guide"] = f"lessons/{args.id}/guide.html"
+        entry["guide"] = f"lessons/{args.id}/guide"  # Cloudflare serves guide.html at /guide
     # an update keeps its place on the home page; a new lesson goes to the top
     ids = [l["id"] for l in lessons]
     if args.id in ids:

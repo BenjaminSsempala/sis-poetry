@@ -1,10 +1,9 @@
-// Cloudflare settings for the class site: serve the files exactly as they are.
+// Cloudflare settings for the class site. Cloudflare serves page.html at /page, so links leave off .html.
 {
   "name": "sis-poetry",
   "compatibility_date": "2025-09-01",
   "assets": {
     "directory": ".",
-    "html_handling": "none",
     "not_found_handling": "none"
   }
 }

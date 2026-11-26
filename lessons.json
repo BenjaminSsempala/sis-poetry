@@ -1,5 +1,14 @@
 [
   {
+    "id": "pause-and-try-again",
+    "title": "Pause and Try Again",
+    "tag": "30 minutes · listening, echo and actions",
+    "icon": "👂",
+    "about": "Listen, pause and try again in a friendly speaking game and class poem.",
+    "path": "lessons/pause-and-try-again/",
+    "guide": "lessons/pause-and-try-again/guide"
+  },
+  {
     "id": "my-promise",
     "title": "My Promise",
     "tag": "30 minutes · chant, actions and a big finish",

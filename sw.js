@@ -1,6 +1,6 @@
 /* Keeps the SIS Poetry lessons working when the internet drops.
    add_lesson.py changes VERSION whenever a lesson is added, so every computer picks up the new list. */
-const VERSION = "2026-11-26-093651";
+const VERSION = "2026-11-26-094339";
 const CACHE = "sis-poetry-" + VERSION;
 const CORE = ["./", "lessons.json", "manifest.webmanifest",
   "assets/logo.png", "assets/icon-192.png", "assets/icon-512.png", "assets/jakarta.woff2"];

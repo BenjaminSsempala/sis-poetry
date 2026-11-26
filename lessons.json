@@ -1,10 +1,10 @@
 [
   {
     "id": "pause-and-try-again",
-    "title": "Pause and Try Again",
-    "tag": "30 minutes · listening, echo and actions",
-    "icon": "👂",
-    "about": "Listen, pause and try again in a friendly speaking game and class poem.",
+    "title": "Let’s Build a Poem",
+    "tag": "30 minutes · words, pictures and actions",
+    "icon": "🐦",
+    "about": "Tap pictures, build the lines and say a bird poem together.",
     "path": "lessons/pause-and-try-again/",
     "guide": "lessons/pause-and-try-again/guide"
   },

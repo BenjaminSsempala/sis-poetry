@@ -1,10 +1,10 @@
 [
   {
     "id": "pause-and-try-again",
-    "title": "Let’s Build a Poem",
+    "title": "Let’s Build Poems",
     "tag": "30 minutes · words, pictures and actions",
     "icon": "🐦",
-    "about": "Tap pictures, build the lines and say a bird poem together.",
+    "about": "Tap pictures, build the lines and say poems about a bird and the rain.",
     "path": "lessons/pause-and-try-again/",
     "guide": "lessons/pause-and-try-again/guide"
   },
